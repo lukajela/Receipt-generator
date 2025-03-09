@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .email-container { background: #000; color: #fff; padding: 20px; }
+        .header { font-size: 24px; font-weight: bold; }
+        .order-details { margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <h2 class="header">Thank you for your order.</h2>
+        <p>One or more of your items will be delivered by a courier service.</p>
+        
+        <h3>Order Summary</h3>
+        <p><strong>Order Number:</strong> 45975913</p>
+        <p><strong>Ordered on:</strong> {{ order_date }}</p>
+        
+        <h3>Items to be Dispatched</h3>
+        <p><strong>{{ product_name }}</strong> - £{{ price }}</p>
+
+        <h3>Shipping Address</h3>
+        <p>{{ full_name }}</p>
+        <p>{{ address }}, {{ city }}</p>
+        <p>{{ postcode }}, {{ country }}</p>
+
+        <h3>Billing & Payment</h3>
+        <p><strong>Bill To:</strong> {{ full_name }}</p>
+        <p><strong>Total:</strong> £{{ price }}</p>
+        
+        <p>Your invoice will be sent via email 2–3 business days after receipt of your order.</p>
+    </div>
+</body>
+</html>
