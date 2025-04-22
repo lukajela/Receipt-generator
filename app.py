@@ -9,6 +9,9 @@ EMAIL_USER = os.getenv("EMAIL_USER")
 EMAIL_PASS = os.getenv("EMAIL_PASS")
 SECRET_KEY = os.getenv("SECRET_KEY") or "kljuc"
 
+app = Flask(__name__)
+app.secret_key = SECRET_KEY
+
 
 COMPANIES = {
     "Apple": {
