@@ -43,7 +43,33 @@ COMPANIES = {
     }
 }
 
+@app.route('/generate', methods=['POST'])
+def generate():
+    if "user_id" not in session:
+        return redirect(url_for('login'))
 
+    company = request.form['company']
+    company_info = COMPANIES.get(company, {
+        "template": "email_template.html",
+        "logo": "",
+        "from_name": "Customer Service"
+    })
+
+    data = {
+        "company": company,
+        "product_name": request.form['product_name'],
+        "product_size": request.form['product_size'],
+        "order_date": request.form['order_date'],
+        "price": request.form['price'],
+        "img_url": request.form['img_url'],
+        "full_name": request.form['full_name'],
+        "address": f"{request.form['address']}, {request.form['city']}",
+        "postcode": request.form['postcode'],
+        "country": request.form['country'],
+        "email": request.form['email'],
+        "processing_fee": "10.00",
+        "logo_url": company_info["logo"]
+    }
 
 
 if __name__ == '__main__':
