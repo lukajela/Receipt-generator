@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>StockX Email</title>
+</head>
+<body style="margin:0; padding:0; background-color:#e6e6e0; font-family:Arial, sans-serif;">
+  <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color:#e6e6e0;">
+    <tr>
+      <td align="center">
+        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="700" style="background-color:#f1f0e6;">
+
+          <!-- HERO SECTION -->
+          <tr>
+            <td style="padding: 0; margin: 0;">
+              <div style="background: linear-gradient(to right, rgba(91,154,131,0.8), rgba(39,121,93,0.85), rgba(22,111,78,0.9)), url('{{ img_url }}') center/cover no-repeat; height: 280px; display: flex; justify-content: space-between; align-items: center; padding: 20px;">
+                <!-- LOGO ROTATED -->
+                <div style="transform: rotate(90deg);">
+                  <img src="{{ logo_url }}" width="200" style="filter: brightness(0) invert(1);" alt="StockX Logo">
+                </div>
+                <!-- STATUS STEP LIST -->
+                <div style="text-align: right; font-size: 14px; color: white;">
+                  <div style="margin-bottom: 12px;">
+                    <span style="display: inline-block; width: 28px; height: 28px; background-color: #000; border-radius: 50%; vertical-align: middle; text-align: center;">
+                      <img src="https://img.icons8.com/ios-glyphs/20/ffffff/shopping-cart.png" style="margin-top: 4px;" />
+                    </span>
+                    <span style="margin-left: 8px;">Ordered</span>
+                  </div>
+                  <div style="margin-bottom: 12px;">
+                    <span style="display: inline-block; width: 28px; height: 28px; background-color: #000; border-radius: 50%; vertical-align: middle; text-align: center;">
+                      <img src="https://img.icons8.com/ios-filled/20/ffffff/delivery.png" style="margin-top: 4px;" />
+                    </span>
+                    <span style="margin-left: 8px;">Shipped to StockX</span>
+                  </div>
+                  <div style="margin-bottom: 12px;">
+                    <span style="display: inline-block; width: 28px; height: 28px; background-color: #000; border-radius: 50%; vertical-align: middle; text-align: center;">
+                      <img src="https://assets.streamlinehq.com/image/private/w_300,h_300,ar_1/f_auto/v1/icons/logos/stockx-oyd90i603rgwapy8860h.png/stockx-h269hr2biajn72wsgspara.png?_a=DAJFJtWIZAAC" 
+                           style="width: 16px; height: 16px; filter: brightness(100%) invert(100%); margin-top: 4px;" />
+                    </span>
+                    <span style="margin-left: 8px;">Arrived at StockX</span>
+                  </div>                                   
+                  <div style="margin-bottom: 12px;">
+                    <span style="display: inline-block; width: 28px; height: 28px; background-color: #000; border-radius: 50%; vertical-align: middle; text-align: center;">
+                      <img src="https://img.icons8.com/ios-filled/20/26e07f/checkmark.png" style="margin-top: 4px;" />
+                    </span>
+                    <span style="margin-left: 8px;">Verified + Shipped</span>
+                  </div>
+                  <div>
+                    <span style="display: inline-block; width: 28px; height: 28px; background-color: #fff; border-radius: 50%; vertical-align: middle; text-align: center;">
+                      <img src="https://img.icons8.com/ios-filled/20/1c8b61/open-box--v1.png" style="margin-top: 4px;" />
+                    </span>
+                    <span style="margin-left: 8px; color: white;">Delivered</span>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+
+          <!-- DELIVERY BAR -->
+          <tr>
+            <td style="background-color:#ded9ce; padding:20px;">
+              <table width="100%">
+                <tr>
+                  <td><img src="https://assets.streamlinehq.com/image/private/w_300,h_300,ar_1/f_auto/v1/icons/logos/stockx-oyd90i603rgwapy8860h.png/stockx-h269hr2biajn72wsgspara.png?_a=DAJFJtWIZAAC" width="50" /></td>
+                  <td align="right">
+                    <h2 style="color:#1c8b61; margin:0;">Order Delivered</h2>
+                    <p style="margin:0; font-size:14px;"><strong>Delivered on:</strong> {{ order_date }}</p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- ORDER INFO -->
+          <tr>
+            <td style="padding:30px 20px 10px 20px; background-color:#ffffff;">
+              <table width="100%">
+                <tr>
+                  <td width="250">
+                    <img src="{{ img_url }}" width="250" alt="{{ product_name }}" style="display:block; max-width:100%;" />
+                  </td>
+                  <td style="padding-left:20px; vertical-align:top;">
+                    <h3 style="color:#1c8b61; margin:0 0 10px 0;">{{ product_name }}</h3>
+                    <p style="margin:4px 0;"><strong>Style ID:</strong> CN8607-002</p>
+                    <p style="margin:4px 0;"><strong>Size:</strong> US {{ product_size }}</p>
+                    <p style="margin:4px 0;"><strong>Condition:</strong> New, StockX Verified</p>
+                    <p style="margin:4px 0;"><strong>Order number:</strong> SX{{ order_date.replace('.', '') }}</p>
+                    <br />
+                    <p style="margin:4px 0;"><strong>Purchase Price:</strong> ${{ price }}</p>
+                    <p style="margin:4px 0;"><strong>Processing Fee:</strong> ${{ processing_fee }}</p>
+                    <p style="margin:4px 0;"><strong>Shipping:</strong> $10.00</p>
+                    <p style="color:#1c8b61; font-weight:bold; margin-top:10px;">
+                      TOTAL PAYMENT: ${{ "%.2f"|format(price.replace(",", ".")|float + processing_fee|float + 10.00) }}
+                    </p>
+                    <p style="font-size:12px; color:#555; margin-top:10px;">
+                      *All applicable duties and VAT are included in the total price of this item.
+                    </p>
+                    <a href="https://stockx.com/track-order" style="display:inline-block; background-color:#000; color:#fff; text-decoration:none; padding:10px 25px; margin-top:15px;" target="_blank">View Order</a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- FOOTER -->
+          <tr>
+            <td style="padding:30px 20px 40px 20px; background-color:#f1f0e6;">
+              <p style="text-align:left; margin-bottom:20px;">
+                Thanks again for choosing StockX! Don’t forget to remind people that you <strong>#GotItOnStockX</strong> by showing off your latest purchase on social.
+              </p>
+              <table role="presentation" cellpadding="0" cellspacing="0" style="margin: 0 auto; margin-bottom:25px;">
+                <tr>
+                  <td><a href="https://www.facebook.com/stockxdotcom/" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png" width="28" height="28" style="margin-right:15px;" /></a></td>
+                  <td><a href="https://x.com/stockx?" target="_blank"><img src="https://i.pinimg.com/736x/69/a6/2a/69a62a5edc08d755dd8a4ef017e14c63.jpg" width="28" height="28" style="margin-right:15px;" /></a></td>
+                  <td><a href="https://www.instagram.com/stockx/" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968776.png" width="28" height="28" style="margin-right:15px;" /></a></td>
+                  <td><a href="https://www.youtube.com/c/Stockx" target="_blank"><img src="https://www.citypng.com/public/uploads/preview/red-youtube-logo-symbol-701751694792489qxkccchok1.png" width="28" height="28" style="margin-right:15px;" /></a></td>
+                  <td><a href="https://discord.com/invite/stockx" target="_blank"><img src="https://logos-world.net/wp-content/uploads/2020/12/Discord-Logo.png" width="28" height="28" /></a></td>
+                </tr>
+              </table>
+              <div style="margin-bottom:20px;">
+                <strong>Frequently Asked Questions</strong><br>
+                <a href="https://stockx.com/help/articles/what-is-the-stockx-return-policy" style="display:block; margin-top:5px; color:#1c8b61; text-decoration:none;" target="_blank">Can I return my item after I've received it?</a>
+                <a href="https://stockx.com/about/our-process/" style="display:block; margin-top:5px; color:#1c8b61; text-decoration:none;" target="_blank">What does the verification process entail for Buyers?</a>
+              </div>
+              <div style="text-align:left; margin-top:10px;">
+                <a href="https://stockx.com/help/articles/how-do-i-contact-customer-service" style="color:black; text-decoration:none; margin-right:15px;" target="_blank">Email Settings</a>
+                <a href="https://stockx.com/help/home" style="color:black; text-decoration:none; margin-right:15px;" target="_blank">Help</a>
+                <a href="https://careers.stockx.com/" style="color:black; text-decoration:none;" target="_blank">Jobs</a>
+              </div>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

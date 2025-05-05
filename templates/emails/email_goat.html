@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GOAT Order Confirmation</title>
+</head>
+<body style="margin: 0; padding: 0; background-color: #f3f3f3;">
+    <table width="100%" bgcolor="#f3f3f3" cellpadding="0" cellspacing="0">
+        <tr>
+            <td align="center">
+                <table width="600" bgcolor="#ffffff" cellpadding="0" cellspacing="0" 
+                       style="margin: 20px; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0,0,0,0.1);">
+                    
+                    <!-- Header -->
+                    <tr>
+                        <td align="center" style="padding: 20px; border-bottom: 2px solid #ddd;">
+                            <img src="https://logos-world.net/wp-content/uploads/2022/01/GOAT-Logo-700x394.png" 
+                                 width="150" alt="GOAT Logo">
+                            <h2 style="font-family: Arial, sans-serif; margin: 10px 0;">Your GOAT Order Confirmation</h2>
+                            <p style="font-size: 14px; color: #555;">Your order is being processed and will be authenticated soon.</p>
+                        </td>
+                    </tr>
+
+                    <!-- Order Details -->
+                    <tr>
+                        <td style="padding: 20px; font-family: Arial, sans-serif; font-size: 14px; color: #333;">
+                            <p><strong>Order Number:</strong> #GT{{ order_date.replace('.', '') }}</p>
+                            <p><strong>Order Date:</strong> {{ order_date }}</p>
+                            <p><strong>Shipping To:</strong> {{ full_name }}, {{ address }}, {{ country }}</p>
+                        </td>
+                    </tr>
+
+                    <!-- Product Image -->
+                    <tr>
+                        <td align="center" style="padding: 20px;">
+                            <img src="{{ img_url }}" alt="Product Image" style="max-width: 50%; border-radius: 10px;">
+                        </td>
+                    </tr>
+
+                    <!-- Items -->
+                    <tr>
+                        <td style="padding: 20px;">
+                            <table width="100%" cellpadding="5" cellspacing="0" 
+                                   style="border-collapse: collapse; font-family: Arial, sans-serif;">
+                                <tr>
+                                    <th align="left" style="border-bottom: 2px solid #ddd; padding: 10px;">Item</th>
+                                    <th align="center" style="border-bottom: 2px solid #ddd; padding: 10px;">Size</th>
+                                    <th align="right" style="border-bottom: 2px solid #ddd; padding: 10px;">Price</th>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 10px;">{{ product_name }}</td>
+                                    <td align="center">{{product_size}}</td>
+                                    <td align="right">${{ price }}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" align="right" style="padding: 10px;">Processing Fee:</td>
+                                    <td align="right" style="padding: 10px;">$25.00</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" align="right" style="padding: 10px;">Shipping:</td>
+                                    <td align="right" style="padding: 10px;">$15.00</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" align="right" style="padding: 10px;">Sales Tax:</td>
+                                    <td align="right" style="padding: 10px;">$40.00</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" align="right" style="padding: 10px; font-weight: bold;">Total:</td>
+                                    <td align="right" style="padding: 10px; font-weight: bold;">
+                                        ${{ "%.2f"|format(price.replace(",", ".")|float + 25.00 + 15.00 + 40.00) }}
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <!-- Payment & Authentication -->
+                    <tr>
+                        <td style="padding: 20px; font-family: Arial, sans-serif; font-size: 14px;">
+                            <p><strong>Payment Method:</strong> Visa •••• 3517</p>
+                            <p><strong>Authentication Status:</strong> <span style="color: #008000; font-weight: bold;">Pending</span></p>
+                        </td>
+                    </tr>
+
+                    <!-- Order Tracking -->
+                    <tr>
+                        <td align="center" style="padding: 20px;">
+                            <a href="https://www.goat.com/orders" 
+                               style="background-color: #000; color: #ffffff; padding: 10px 20px; text-decoration: none; 
+                                      font-size: 14px; border-radius: 5px; font-family: Arial, sans-serif;">
+                                Track My Order
+                            </a>
+                        </td>
+                    </tr>
+
+                    <!-- Footer -->
+                    <tr>
+                        <td align="center" style="padding: 20px; font-size: 12px; font-family: Arial, sans-serif; color: #777;">
+                            <p>Need help? Visit <a href="https://www.goat.com/support" style="color: #000; text-decoration: none;">GOAT Help Center</a>.</p>
+                            <p>Thank you for shopping with GOAT!</p>
+                        </td>
+                    </tr>
+
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
