@@ -9,6 +9,9 @@ from dotenv import load_dotenv
 import csv
 from io import StringIO
 from flask import Response
+import stripe
+from flask import g
+
 
 # 🔹 Naloži .env
 load_dotenv()
@@ -24,11 +27,15 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///receiptgen.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
+stripe.api_key = os.getenv("STRIPE_SECRET_KEY")
+
 # 🔹 MODELI
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(255), nullable=False)
+    is_paid = db.Column(db.Boolean, default=False)         
+    used_trial = db.Column(db.Boolean, default=False)
 
 class EmailLog(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -77,7 +84,7 @@ COMPANIES = {
 def index():
     if "user_id" not in session:
         return redirect(url_for('login'))
-    return render_template('index.html', companies=COMPANIES.keys())
+    return render_template('index.html', companies=COMPANIES.keys(), current_user=g.user)
 
 # 🔹 Registracija
 @app.route('/register', methods=['GET', 'POST'])
@@ -122,6 +129,17 @@ def logout():
 def generate():
     if "user_id" not in session:
         return redirect(url_for('login'))
+    
+    user = User.query.get(session["user_id"])
+
+    if not user.is_paid:
+        if user.used_trial:
+            flash("You have used your free trial. Upgrade your account to continue.", "danger")
+            return redirect(url_for('pricing'))
+        else:
+            user.used_trial = True
+            db.session.commit()
+
 
     company = request.form['company']
     company_info = COMPANIES.get(company, {
@@ -161,7 +179,7 @@ def generate():
             server.login(EMAIL_USER, EMAIL_PASS)
             server.send_message(msg)
 
-        # Log v bazo
+        
         log = EmailLog(
             user_id=session["user_id"],
             company=company,
@@ -191,6 +209,7 @@ def preview():
     html_content = render_template(f"emails/{company_info['template']}", **data)
     return html_content
 
+# 🔹Logsi
 @app.route('/logs', methods=['GET', 'POST'])
 def logs():
     if "user_id" not in session:
@@ -256,6 +275,54 @@ def clear_logs():
     db.session.commit()
     flash("All logs deleted.", "success")
     return redirect(url_for('logs'))
+
+
+# 🔹Plačilo
+@app.route('/pricing')
+def pricing():
+    return render_template("pricing.html")
+
+@app.route('/create-checkout-session')
+def create_checkout_session():
+    session_stripe = stripe.checkout.Session.create(
+        payment_method_types=['card'],
+        line_items=[{
+            'price_data': {
+                'currency': 'eur',
+                'product_data': {
+                    'name': 'ReceiptGenerator Premium',
+                },
+                'unit_amount': 1000,  
+            },
+            'quantity': 1,
+        }],
+        mode='payment',
+        success_url=url_for('payment_success', _external=True),
+        cancel_url=url_for('pricing', _external=True),
+    )
+    return redirect(session_stripe.url, code=303) 
+
+@app.route('/payment-success')
+def payment_success():
+    if "user_id" not in session:
+        return redirect(url_for("login"))
+
+    user = User.query.get(session["user_id"])
+    user.is_paid = True
+    db.session.commit()
+    flash("Payment successful! You now have unlimited access.", "success")
+    return redirect(url_for("index"))
+
+
+# 🔹Premium ali free trail
+@app.before_request
+def load_logged_in_user():
+    user_id = session.get("user_id")
+    g.user = None
+    if user_id is not None:
+        g.user = User.query.get(user_id)
+
+
 
 
 # 🔹 Zagon aplikacije
