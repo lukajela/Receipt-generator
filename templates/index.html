@@ -10,6 +10,19 @@
     <div class="container">
         <h1>Generate Order Confirmation</h1>
 
+        {% if current_user.is_paid %}
+            <p style="color: green; font-weight: bold; margin-top: -10px;">🌟 Status: Premium User</p>
+        {% elif current_user.used_trial %}
+            <p style="color: orange; font-weight: bold; margin-top: -10px;">🧪 Status: Free Trial Used</p>
+        {% else %}
+            <p style="color: blue; font-weight: bold; margin-top: -10px;">🧪 Status: Free Trial Active</p>
+        {% endif %}
+
+        {% if not current_user.is_paid %}
+            <a href="{{ url_for('pricing') }}" class="premium-upgrade-button">💳 Upgrade to Premium</a>
+        {% endif %}
+
+
         <!-- 🔹 MENU POD NASLOVOM -->
         <div class="nav-bar">
             <input type="checkbox" id="menu-toggle">
