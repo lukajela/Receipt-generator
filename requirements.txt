@@ -3,3 +3,4 @@ Flask-SQLAlchemy
 python-dotenv
 email-validator
 Werkzeug
+Stripe
