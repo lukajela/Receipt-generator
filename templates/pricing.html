@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upgrade to Premium</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #007bff, #00d4ff);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            animation: fadeIn 0.7s ease-in-out;
+        }
+
+        h2 {
+            color: #333;
+            font-size: 26px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        li {
+            margin: 10px 0;
+            font-size: 16px;
+        }
+
+        .check {
+            color: green;
+            margin-right: 8px;
+        }
+
+        .button {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 12px 24px;
+            background: linear-gradient(to right, #007bff, #0056b3);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(0, 91, 187, 0.3);
+        }
+
+        .button:hover {
+            background: linear-gradient(to right, #0056b3, #004494);
+            transform: scale(1.05);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>🔐 Premium Access</h2>
+        <p>Your free trial has ended.</p>
+        <p>Upgrade now for only <strong>€10.00</strong> and enjoy:</p>
+        <ul>
+            <li><span class="check">✔</span> Unlimited email generation</li>
+            <li><span class="check">✔</span> No delays</li>
+            <li><span class="check">✔</span> Priority support</li>
+        </ul>
+        <a href="{{ url_for('create_checkout_session') }}" class="button" style="margin-right: 10px;">Upgrade for €10.00</a>
+        <a href="{{ url_for('index') }}" class="button" style="background: linear-gradient(to right, #6c757d, #495057);">⬅ Back to Home</a>
+    </div>
+</body>
+</html>

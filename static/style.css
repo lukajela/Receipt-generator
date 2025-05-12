@@ -1,0 +1,257 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to right, #007bff, #00d4ff);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    background: white;
+    padding: 40px 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    width: 50%;
+    max-width: 500px;
+    text-align: center;
+    animation: fadeIn 0.5s ease-in-out;
+    position: relative;
+}
+
+h1 {
+    color: #333;
+    font-size: 26px;
+    margin-bottom: 20px;
+    margin-top: 0;
+    font-weight: 700;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+label {
+    margin-top: 12px;
+    font-weight: 600;
+    width: 100%;
+    text-align: left;
+    color: #444;
+}
+
+input, select {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    background: #f7f7f7;
+    transition: all 0.3s ease-in-out;
+}
+
+input:focus, select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
+    background: #fff;
+    outline: none;
+}
+
+/* Dodano boljši izgled gumba */
+button {
+    margin-top: 20px;
+    padding: 12px;
+    background: linear-gradient(to right, #007bff, #0056b3);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    width: 100%;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 5px 15px rgba(0, 91, 187, 0.3);
+}
+
+button:hover {
+    background: linear-gradient(to right, #0056b3, #004494);
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 91, 187, 0.4);
+}
+
+/* Flash sporočila */
+.flash-messages {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.flash-messages p {
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-weight: bold;
+  display: inline-block;
+}
+
+.success {
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+  color: #155724;
+}
+
+.danger {
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  color: #721c24;
+}
+
+/* Animacija fade-in */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 🔹 NOVI STIL ZA NAVIGATION POD NASLOVOM */
+.nav-bar {
+    text-align: center;
+    margin-bottom: 20px;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.nav-links a,
+.nav-links button {
+    background-color: #007bff;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.3s ease;
+}
+
+.nav-links a:hover,
+.nav-links button:hover {
+    background-color: #0056b3;
+}
+
+/* Hamburger (lahko ga skrivaš, če ni potreben) */
+.hamburger {
+    display: none;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+}
+#menu-toggle {
+    display: none;
+}
+
+
+
+/* NAVIGATION MENU */
+header {
+    width: 100%;
+    background: var(--header-bg);
+    padding: 15px 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  }
+  .nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--text-color);
+  }
+  nav {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+  nav a, nav button {
+    text-decoration: none;
+    color: var(--text-color);
+    padding: 8px 14px;
+    border-radius: 6px;
+    transition: background 0.3s;
+    background: var(--btn-bg);
+    border: none;
+    cursor: pointer;
+  }
+  nav a:hover, nav button:hover {
+    background: var(--btn-hover);
+  }
+  
+  /* HAMBURGER */
+  .hamburger {
+    display: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--text-color);
+  }
+  #menu-toggle {
+    display: none;
+  }
+  
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav {
+      display: none;
+      flex-direction: column;
+      background: var(--header-bg);
+      position: absolute;
+      top: 60px;
+      right: 20px;
+      width: 200px;
+      padding: 15px;
+      border-radius: 10px;
+      z-index: 10;
+    }
+    #menu-toggle:checked + .hamburger + nav {
+      display: flex;
+    }
+    .hamburger {
+      display: block;
+    }
+  }
+
+
+  .premium-upgrade-button {
+    display: inline-block;
+    background: linear-gradient(to right, #ff9800, #f57c00);
+    color: white;
+    font-weight: 600;
+    padding: 12px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 5px 15px rgba(245, 124, 0, 0.3);
+}
+
+.premium-upgrade-button:hover {
+    background: linear-gradient(to right, #f57c00, #e65100);
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(245, 124, 0, 0.4);
+}
